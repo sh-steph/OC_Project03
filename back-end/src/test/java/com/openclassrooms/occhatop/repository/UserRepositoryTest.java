@@ -20,17 +20,17 @@ public class UserRepositoryTest {
     private TestEntityManager entityManager;
 
     @Autowired
-    private UserRepository repo;
+    private UserRepository userRepository;
 
     // test methods go below
     @Test
     public void testCreateUser() {
         User user = new User();
-        user.setEmail("test@gmail.com");
+        user.setEmail("test2@gmail.com");
         user.setPassword("test1234");
         user.setName("Test");
 
-        User savedUser = repo.save(user);
+        User savedUser = userRepository.save(user);
 
         User existUser = entityManager.find(User.class, savedUser.getId());
 
