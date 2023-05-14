@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     private static final String[] AUTHORIZED_URLS = {
             "/v3/api-docs/**",
@@ -64,14 +63,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         return http.build();
     }
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers("/").permitAll(); // permet l'accès à la page d'accueil sans authentification
-///*              .antMatchers("/admin/**").hasRole("ADMIN") // restreint l'accès à la page "/admin" aux utilisateurs ayant le rôle "ADMIN"
-//                .anyRequest().authenticated() // nécessite une authentification pour toutes les autres URLs
-//                .and()
-//                .formLogin(); // utilise le formulaire de login par défaut de Spring Security*/
-//    }
-//
 }

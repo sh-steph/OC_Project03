@@ -26,13 +26,14 @@ public class UserRepositoryTest {
     @Test
     public void testCreateUser() {
         User user = new User();
-        user.setEmail("test2@gmail.com");
+        user.setEmail("testOC@gmail.com");
         user.setPassword("test1234");
-        user.setName("Test");
+        user.setName("OpenClass");
 
         User savedUser = userRepository.save(user);
 
         User existUser = entityManager.find(User.class, savedUser.getId());
+        System.out.print(user);
 
         assertThat(user.getEmail()).isEqualTo(existUser.getEmail());
         assertThat(existUser.getCreatedAt()).isNotNull();

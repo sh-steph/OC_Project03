@@ -1,5 +1,6 @@
 package com.openclassrooms.occhatop.model.auth;
 
+import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
+@Builder
 @Table(name = "USERS")
 public class User implements UserDetails {
 
