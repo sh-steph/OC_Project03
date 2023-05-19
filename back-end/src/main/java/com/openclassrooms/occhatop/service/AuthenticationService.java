@@ -6,13 +6,18 @@ import com.openclassrooms.occhatop.dao.RegisterRequest;
 import com.openclassrooms.occhatop.model.auth.User;
 import com.openclassrooms.occhatop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -34,17 +39,21 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) {
-//        ajouter la condition si il ne trouve pas = 401
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .bearerToken(jwtToken)
-                .build();
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+            var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+            var jwtToken = jwtService.generateToken(user);
+            return AuthenticationResponse.builder()
+                    .bearerToken(jwtToken)
+                    .build();
+        } catch (AuthenticationException e) {
+            log.info("Incorrect email or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect email or password");
+        }
     }
 }
