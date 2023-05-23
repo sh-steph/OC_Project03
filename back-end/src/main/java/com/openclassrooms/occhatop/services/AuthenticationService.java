@@ -1,10 +1,10 @@
-package com.openclassrooms.occhatop.service;
+package com.openclassrooms.occhatop.services;
 
 import com.openclassrooms.occhatop.dao.AuthenticationRequest;
 import com.openclassrooms.occhatop.dao.AuthenticationResponse;
 import com.openclassrooms.occhatop.dao.RegisterRequest;
-import com.openclassrooms.occhatop.model.auth.User;
-import com.openclassrooms.occhatop.repository.UserRepository;
+import com.openclassrooms.occhatop.models.authentication.User;
+import com.openclassrooms.occhatop.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

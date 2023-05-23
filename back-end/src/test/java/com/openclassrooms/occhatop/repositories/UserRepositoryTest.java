@@ -1,8 +1,8 @@
-package com.openclassrooms.occhatop.repository;
+package com.openclassrooms.occhatop.repositories;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.openclassrooms.occhatop.model.auth.User;
+import com.openclassrooms.occhatop.models.authentication.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

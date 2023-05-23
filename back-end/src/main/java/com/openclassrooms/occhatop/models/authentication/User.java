@@ -1,4 +1,4 @@
-package com.openclassrooms.occhatop.model.auth;
+package com.openclassrooms.occhatop.models.authentication;
 
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
@@ -135,6 +135,5 @@ public class User implements UserDetails {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 
 }

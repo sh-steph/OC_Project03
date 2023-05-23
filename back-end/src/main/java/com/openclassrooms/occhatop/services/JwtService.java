@@ -1,4 +1,4 @@
-package com.openclassrooms.occhatop.service;
+package com.openclassrooms.occhatop.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

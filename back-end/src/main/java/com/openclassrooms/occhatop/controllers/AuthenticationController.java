@@ -1,10 +1,10 @@
-package com.openclassrooms.occhatop.controller;
+package com.openclassrooms.occhatop.controllers;
 
 import com.openclassrooms.occhatop.dao.AuthenticationRequest;
 import com.openclassrooms.occhatop.dao.AuthenticationResponse;
 import com.openclassrooms.occhatop.dao.RegisterRequest;
 import lombok.extern.slf4j.Slf4j;
-import com.openclassrooms.occhatop.service.AuthenticationService;
+import com.openclassrooms.occhatop.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

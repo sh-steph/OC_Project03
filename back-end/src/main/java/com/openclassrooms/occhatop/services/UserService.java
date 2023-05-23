@@ -1,7 +1,7 @@
-package com.openclassrooms.occhatop.service;
+package com.openclassrooms.occhatop.services;
 
-import com.openclassrooms.occhatop.model.auth.User;
-import com.openclassrooms.occhatop.repository.UserRepository;
+import com.openclassrooms.occhatop.models.authentication.User;
+import com.openclassrooms.occhatop.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         User userFind = userRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("The following user doesn't exist : " + email));
+                .orElseThrow(() -> new UsernameNotFoundException(email));
         return new User(
                 userFind.getId(),
                 userFind.getEmail(),
@@ -26,5 +27,11 @@ public class UserService implements UserDetailsService {
                 userFind.getPassword(),
                 userFind.getCreatedAt(),
                 userFind.getUpdatedAt());
+    }
+
+    public User getUserById(Long id) {
+        return userRepository
+                .findById(id)
+                .orElseThrow();
     }
 }

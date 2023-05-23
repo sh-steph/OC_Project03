@@ -1,6 +1,6 @@
-package com.openclassrooms.occhatop.config;
+package com.openclassrooms.occhatop.configuration;
 
-import com.openclassrooms.occhatop.service.UserService;
+import com.openclassrooms.occhatop.services.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,6 +1,6 @@
-package com.openclassrooms.occhatop.config;
+package com.openclassrooms.occhatop.configuration;
 
-import com.openclassrooms.occhatop.service.JwtService;
+import com.openclassrooms.occhatop.services.JwtService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
