@@ -1,7 +1,6 @@
 package com.openclassrooms.occhatop.models.rental;
 
 import javax.persistence.*;
-import com.openclassrooms.occhatop.models.authentication.User;
 import lombok.Data;
 import java.time.LocalDateTime;
 
@@ -17,9 +16,9 @@ public class Rental {
     private double price;
     private String picture;
     private String description;
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner_id;
+
+    @Column(name = "owner_id",nullable = false)
+    private Long ownerId;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
@@ -29,14 +28,13 @@ public class Rental {
     public Rental() {
     }
 
-    public Rental(Long id, String name, Double surface, Double price, String picture, String description, User owner_id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Rental(Long id, String name, Double surface, Double price, String picture, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.surface = surface;
         this.price = price;
         this.picture = picture;
         this.description = description;
-        this.owner_id = owner_id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -95,12 +93,12 @@ public class Rental {
         this.description = description;
     }
 
-    public User getOwnerId() {
-        return owner_id;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(User owner) {
-        this.owner_id = owner_id;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public LocalDateTime getCreatedAt() {

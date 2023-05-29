@@ -3,12 +3,15 @@ package com.openclassrooms.occhatop.services;
 import com.openclassrooms.occhatop.exceptions.RentalNotFoundException;
 import com.openclassrooms.occhatop.models.rental.Rental;
 import com.openclassrooms.occhatop.repositories.RentalRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class RentalService {
 
     private RentalRepository rentalRepository;
+
 
     public RentalService(RentalRepository rentalRepository) {
         this.rentalRepository = rentalRepository;
@@ -22,8 +25,8 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public Rental addNewRental(Rental newRental) {
-        return rentalRepository.save(newRental);
+    public void addNewRental(Rental rental) {
+        rentalRepository.save(rental);
     }
 
     public Rental updateRental(Rental rentalUpdate, Long id) {
@@ -32,7 +35,6 @@ public class RentalService {
             rental.setDescription(rentalUpdate.getDescription());
             rental.setPicture(rentalUpdate.getPicture());
             rental.setSurface(rentalUpdate.getSurface());
-            rental.setOwner_id(rentalUpdate.getOwner_id());
             return rentalRepository.save(rental);
         }).orElseGet(() -> {
             rentalUpdate.setId(id);
