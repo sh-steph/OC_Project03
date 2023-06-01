@@ -44,6 +44,11 @@ public class Rental {
         createdAt = LocalDateTime.now();
     }
 
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
+
     //    Getters Setters
     public Long getId() {
         return id;
@@ -113,7 +118,7 @@ public class Rental {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdatedAt() {
+        onUpdate();
     }
 }

@@ -35,6 +35,7 @@ public class RentalService {
             rental.setDescription(rentalUpdate.getDescription());
             rental.setPicture(rentalUpdate.getPicture());
             rental.setSurface(rentalUpdate.getSurface());
+            rental.setUpdatedAt();
             return rentalRepository.save(rental);
         }).orElseGet(() -> {
             rentalUpdate.setId(id);

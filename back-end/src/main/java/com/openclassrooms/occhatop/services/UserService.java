@@ -28,10 +28,5 @@ public class UserService implements UserDetailsService {
                 userFind.getCreatedAt(),
                 userFind.getUpdatedAt());
     }
-
-    public User getUserById(Long id) {
-        return userRepository
-                .findById(id)
-                .orElseThrow();
-    }
 }
+

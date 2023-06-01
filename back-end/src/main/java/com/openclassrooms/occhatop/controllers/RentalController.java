@@ -14,7 +14,6 @@ public class RentalController {
     @Autowired
     private RentalService rentalService;
 
-
     @GetMapping
     public Iterable<Rental> getAllRentals() {
         return rentalService.getAllRentals();
