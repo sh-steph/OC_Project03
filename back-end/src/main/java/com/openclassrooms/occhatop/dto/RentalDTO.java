@@ -1,57 +1,42 @@
-package com.openclassrooms.occhatop.models.rental;
+package com.openclassrooms.occhatop.dto;
 
-import javax.persistence.*;
-
-import lombok.Data;
+import com.openclassrooms.occhatop.models.rental.Rental;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Data
-@Table(name = "RENTALS")
-public class Rental {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RentalDTO {
     private Long id;
     private String name;
     private double surface;
     private double price;
-    private String picture;
+    private MultipartFile picture;
+    private String pictureUrl;
     private String description;
-
-    @Column(name = "owner_id", nullable = false)
     private Long ownerId;
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
-    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    private Rental rental;
+
     // Constructors
-    public Rental() {
+    public RentalDTO() {
     }
 
-    public Rental(Long id, String name, Double surface, Double price, String picture, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public RentalDTO(Long id, String name, double surface, double price, MultipartFile picture, String pictureUrl, String description, Long ownerId, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.surface = surface;
         this.price = price;
         this.picture = picture;
+        this.pictureUrl = pictureUrl;
         this.description = description;
+        this.ownerId = ownerId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
-
-    //    Getters Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -68,7 +53,7 @@ public class Rental {
         this.name = name;
     }
 
-    public Double getSurface() {
+    public double getSurface() {
         return surface;
     }
 
@@ -76,7 +61,7 @@ public class Rental {
         this.surface = surface;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -84,11 +69,11 @@ public class Rental {
         this.price = price;
     }
 
-    public String getPicture() {
+    public MultipartFile getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public void setPicture(MultipartFile picture) {
         this.picture = picture;
     }
 
@@ -120,7 +105,15 @@ public class Rental {
         return updatedAt;
     }
 
-    public void setUpdatedAt() {
-        onUpdate();
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }
