@@ -87,7 +87,7 @@ Les mappings API permettent d'exposer les fonctionnalités de l'application aux 
 
 ## Swagger
 
-Vous avez la possibilitté consulté l'ensemble des API et y expérimenter à travers Swagger via le lien suivant `http://localhost:8090/swagger-ui/index.html` lorsque l'application est exécuté.
+Vous avez la possibilitté consulté l'ensemble des API et y expérimenter à travers Swagger via le lien suivant `http://localhost:3000/swagger-ui/index.html` lorsque l'application est exécuté.
 
 </details>
 <details>
@@ -195,7 +195,7 @@ API mappings are used to expose the application's functionality to clients, so t
 
 ## Swagger
 
-You can view and experiment with all the APIs through Swagger through the following link `http://localhost:8090/swagger-ui/index.html` when the application is running.
+You can view and experiment with all the APIs through Swagger through the following link `http://localhost:3000/swagger-ui/index.html` when the application is running.
 
 </details>
 

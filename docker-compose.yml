@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  db_prod:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'oc_chatop_db'
+      MYSQL_USER: 'oc_user'
+      MYSQL_PASSWORD: 'oc_pwd'
+      MYSQL_ROOT_PASSWORD: 'oc_pwd'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+
+  # frontend:
+  #     image: node:14-alpine
+  #     volumes:
+  #       - ./front-end:/app
+  #     working_dir: /app
+  #     ports:
+  #       - 4200:4200
+  #     expose:
+  #       - '4200'
+  #     depends_on:
+  #       - db_prod
+  #     command: npm start
