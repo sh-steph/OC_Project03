@@ -34,7 +34,7 @@ public class AuthenticationService {
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .bearerToken(jwtToken)
+                .token(jwtToken)
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class AuthenticationService {
             var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
             var jwtToken = jwtService.generateToken(user);
             return AuthenticationResponse.builder()
-                    .bearerToken(jwtToken)
+                    .token(jwtToken)
                     .build();
         } catch (AuthenticationException e) {
             log.info("Incorrect email or password");

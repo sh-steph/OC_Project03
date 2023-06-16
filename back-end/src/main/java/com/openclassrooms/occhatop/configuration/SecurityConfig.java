@@ -1,6 +1,7 @@
 package com.openclassrooms.occhatop.configuration;
 
 import com.openclassrooms.occhatop.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +29,8 @@ public class SecurityConfig {
             "/static/**"
     };
 
+    @Autowired
+    private AuthEntryPointJwt authEntryPointJwt;
     @Bean
     public JwtAuthenticationFilter authTokenFilter() {
         return new JwtAuthenticationFilter();
@@ -54,10 +57,21 @@ public class SecurityConfig {
                 .and()
                 .csrf()
                 .disable()
+                .exceptionHandling().authenticationEntryPoint(authEntryPointJwt)
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests().antMatchers(AUTHORIZED_URLS).permitAll()
-                .antMatchers("/api/**").authenticated()
+                .authorizeRequests()
+                .antMatchers("/v3/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/api/auth/register").permitAll()
+                .antMatchers("/api/auth/login").permitAll()
+                .antMatchers("/resources/static/**").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/api/auth/me").authenticated()
+                .antMatchers("/api/messages/**").authenticated()
+                .antMatchers("/api/rentals/**").authenticated()
                 .anyRequest().authenticated();
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
