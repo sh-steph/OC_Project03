@@ -1,11 +1,20 @@
 package com.openclassrooms.occhatop.models.message;
 
-import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Data
 @Table(name = "MESSAGES")
@@ -22,19 +31,6 @@ public class Message {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    // Constructors
-    public Message() {
-    }
-
-    public Message(Long id, Long rentalId, Long userId, String message, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        this.id = id;
-        this.rentalId = rentalId;
-        this.userId = userId;
-        this.message = message;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 
     @PrePersist
     protected void onCreate() {

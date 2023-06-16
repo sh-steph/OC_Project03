@@ -12,10 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
+import java.io.OutputStream;
 import java.util.UUID;
 
 @Slf4j
@@ -48,29 +48,37 @@ public class RentalController {
             rentalDTO.setPictureUrl("http://localhost:8090/images/rentals/" + fileName);
             rentalDTO.setPicture(picture);
         }
-
         rentalService.addNewRental(rentalDTO);
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    private String generateUniqueFileName(String originalFileName) {
-        String uuid = UUID.randomUUID().toString();
-        String fileExtension = FilenameUtils.getExtension(originalFileName);
-        return uuid + "." + fileExtension;
-    }
+//    private String generateUniqueFileName(String originalFileName) {
+//        String uuid = UUID.randomUUID().toString();
+//        String fileExtension = FilenameUtils.getExtension(originalFileName);
+//        return uuid + "." + fileExtension;
+//    }
 
     private void saveImageToFile(MultipartFile picture, String filePath) {
         try {
-            Path destinationPath = Path.of(filePath);
-            Files.copy(picture.getInputStream(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            File file = new File(filePath);
+            OutputStream outputStream = new FileOutputStream(file);
+            outputStream.write(picture.getBytes());
+            outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @PutMapping("/{id}")
-    public Rental updateRental(@RequestBody Rental updateRental, @PathVariable Long id) {
+    public Rental updateRental(@ModelAttribute("rentals") RentalDTO updateRental, @PathVariable Long id) {
+        MultipartFile picture = updateRental.getPicture();
+        if (picture != null && !picture.isEmpty()) {
+            String fileName = picture.getOriginalFilename();
+            String filePath = imageUploadDirectory + fileName;
+            saveImageToFile(picture, filePath);
+            updateRental.setPictureUrl("http://localhost:8090/images/rentals/" + fileName);
+            updateRental.setPicture(picture);
+        }
         return rentalService.updateRental(updateRental, id);
     }
 }
