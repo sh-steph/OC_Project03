@@ -49,11 +49,6 @@ public class RentalService {
         Optional<Rental> search = rentalRepository.findById(id);
         if(!search.isEmpty()) {
             Rental rental = search.get();
-            String previousImagePath = imageUploadDirectory + rental.getPicture();
-            if (previousImagePath != null) {
-                File previousImageFile = new File(previousImagePath);
-                previousImageFile.delete();
-            }
             rental.setName(rentalUpdate.getName());
             rental.setSurface(rentalUpdate.getSurface());
             rental.setPrice(rentalUpdate.getPrice());

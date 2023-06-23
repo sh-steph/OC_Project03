@@ -6,6 +6,8 @@ import com.openclassrooms.occhatop.dao.RegisterRequest;
 import com.openclassrooms.occhatop.dto.UserDTO;
 import com.openclassrooms.occhatop.services.AuthenticationService;
 import com.openclassrooms.occhatop.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -43,6 +45,8 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.login(request));
     }
 
+    @Operation(summary = "Get User data", description = "Get User connected data")
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/me")
     public UserDTO getCurrentUser() {
         return userService.getCurrentUser();
