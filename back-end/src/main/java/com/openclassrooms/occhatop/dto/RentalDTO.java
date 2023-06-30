@@ -24,7 +24,7 @@ public class RentalDTO {
     @Schema(hidden = true)
     private String pictureUrl;
     private String description;
-    private Long ownerId;
+    private Long owner_id;
     @Schema(hidden = true)
     private LocalDate createdAt;
     @Schema(hidden = true)

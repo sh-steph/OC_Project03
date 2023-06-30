@@ -43,6 +43,7 @@ export class FormComponent implements OnInit {
   }
 
   public submit(): void {
+    const idUser = String(this.sessionService.user!.id);
     const formData = new FormData();
     formData.append('name', this.rentalForm!.get('name')?.value);
     formData.append('surface', this.rentalForm!.get('surface')?.value);
@@ -51,6 +52,7 @@ export class FormComponent implements OnInit {
       formData.append('picture', this.rentalForm!.get('picture')?.value._files[0]);
     }
     formData.append('description', this.rentalForm!.get('description')?.value);
+    formData.append('owner_id', idUser);
     if (!this.onUpdate) {
       this.rentalsService
         .create(formData)

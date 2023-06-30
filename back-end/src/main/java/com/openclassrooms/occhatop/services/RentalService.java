@@ -5,7 +5,6 @@ import com.openclassrooms.occhatop.exceptions.RentalNotFoundException;
 import com.openclassrooms.occhatop.models.rental.Rental;
 import com.openclassrooms.occhatop.repositories.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -34,7 +33,7 @@ public class RentalService {
         rental.setSurface(rentalDTO.getSurface());
         rental.setPrice(rentalDTO.getPrice());
         rental.setDescription(rentalDTO.getDescription());
-        rental.setOwner_id(rentalDTO.getOwnerId());
+        rental.setOwner_id(rentalDTO.getOwner_id());
         rental.setCreated_at(LocalDateTime.now());
         rental.setUpdated_at(null);
         rental.setPicture(rentalDTO.getPictureUrl());
@@ -49,7 +48,7 @@ public class RentalService {
             rental.setSurface(rentalUpdate.getSurface());
             rental.setPrice(rentalUpdate.getPrice());
             rental.setDescription(rentalUpdate.getDescription());
-            rental.setOwner_id(rentalUpdate.getOwnerId());
+            rental.setOwner_id(rentalUpdate.getOwner_id());
             rental.setPicture(rentalUpdate.getPictureUrl());
             rental.setUpdated_at(LocalDateTime.now());
             return rentalRepository.save(rental);
