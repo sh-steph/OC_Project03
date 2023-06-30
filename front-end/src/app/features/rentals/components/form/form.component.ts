@@ -51,7 +51,6 @@ export class FormComponent implements OnInit {
       formData.append('picture', this.rentalForm!.get('picture')?.value._files[0]);
     }
     formData.append('description', this.rentalForm!.get('description')?.value);
-
     if (!this.onUpdate) {
       this.rentalsService
         .create(formData)
@@ -64,8 +63,6 @@ export class FormComponent implements OnInit {
   }
 
   private initForm(rental?: Rental): void {
-    console.log(rental);
-    console.log(this.sessionService.user!.id);
     if(rental?.owner_id !== this.sessionService.user!.id && rental !== undefined) {
       this.router.navigate(['/rentals']);
     } else {
