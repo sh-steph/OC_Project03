@@ -15,7 +15,6 @@ import java.time.LocalDate;
 @Data
 public class RentalDTO {
 
-
     @Schema(hidden = true)
     private Long id;
     private String name;

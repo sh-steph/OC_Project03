@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @AllArgsConstructor
@@ -32,21 +32,21 @@ public class Rental {
     private String description;
 
     @Column(name = "owner_id", nullable = false)
-    private Long ownerId;
+    private Long owner_id;
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime created_at;
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updated_at;
 
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDate.now();
+        created_at = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDate.now();
+        updated_at = LocalDateTime.now();
     }
 
 }

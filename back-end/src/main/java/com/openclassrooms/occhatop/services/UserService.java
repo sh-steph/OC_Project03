@@ -1,6 +1,7 @@
 package com.openclassrooms.occhatop.services;
 
 import com.openclassrooms.occhatop.dto.UserDTO;
+import com.openclassrooms.occhatop.exceptions.UserIdNotFoundException;
 import com.openclassrooms.occhatop.exceptions.UserNotFoundException;
 import com.openclassrooms.occhatop.models.authentication.User;
 import com.openclassrooms.occhatop.repositories.UserRepository;
@@ -39,6 +40,9 @@ public class UserService implements UserDetailsService {
         return getUserDTO(user);
     }
 
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserIdNotFoundException(id));
+    }
 
     private UserDTO getUserDTO(User user) {
         UserDTO userDTO = new UserDTO();

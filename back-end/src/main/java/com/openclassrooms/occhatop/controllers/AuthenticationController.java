@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @Controller
-@RequestMapping("/api/auth") // path de base
+@RequestMapping("/api/auth")
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;

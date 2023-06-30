@@ -26,24 +26,24 @@ public class Message {
     private Long id;
 
     @Column(name = "rental_id", nullable = false)
-    private Long rentalId;
+    private Long rental_id;
 
     @Column(name = "user_id", nullable = false)
-    private Long userId;
+    private Long user_id;
 
     private String message;
 
     @Schema(hidden = true)
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
     @Schema(hidden = true)
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 
     @Schema(hidden = true)
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
+        created_at = LocalDateTime.now();
     }
 }

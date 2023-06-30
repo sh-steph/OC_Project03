@@ -69,6 +69,7 @@ public class SecurityConfig {
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/static/**").permitAll()
+                .antMatchers("/images/**").permitAll()
                 .antMatchers("/api/auth/me").authenticated()
                 .antMatchers("/api/messages/**").authenticated()
                 .antMatchers("/api/rentals/**").authenticated()

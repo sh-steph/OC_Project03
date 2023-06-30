@@ -7,9 +7,7 @@ import com.openclassrooms.occhatop.repositories.RentalRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -17,8 +15,6 @@ import java.util.Optional;
 public class RentalService {
 
     private RentalRepository rentalRepository;
-    @Value("${images.upload.directory}")
-    private String imageUploadDirectory;
 
     public RentalService(RentalRepository rentalRepository) {
         this.rentalRepository = rentalRepository;
@@ -38,9 +34,9 @@ public class RentalService {
         rental.setSurface(rentalDTO.getSurface());
         rental.setPrice(rentalDTO.getPrice());
         rental.setDescription(rentalDTO.getDescription());
-        rental.setOwnerId(rentalDTO.getOwnerId());
-        rental.setCreatedAt(LocalDate.now());
-        rental.setUpdatedAt(null);
+        rental.setOwner_id(rentalDTO.getOwnerId());
+        rental.setCreated_at(LocalDateTime.now());
+        rental.setUpdated_at(null);
         rental.setPicture(rentalDTO.getPictureUrl());
         rentalRepository.save(rental);
     }
@@ -53,9 +49,9 @@ public class RentalService {
             rental.setSurface(rentalUpdate.getSurface());
             rental.setPrice(rentalUpdate.getPrice());
             rental.setDescription(rentalUpdate.getDescription());
-            rental.setOwnerId(rentalUpdate.getOwnerId());
+            rental.setOwner_id(rentalUpdate.getOwnerId());
             rental.setPicture(rentalUpdate.getPictureUrl());
-            rental.setUpdatedAt(LocalDate.now());
+            rental.setUpdated_at(LocalDateTime.now());
             return rentalRepository.save(rental);
         } else {
             return null;

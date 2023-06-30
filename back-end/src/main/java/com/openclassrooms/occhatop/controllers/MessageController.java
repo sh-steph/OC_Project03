@@ -1,11 +1,13 @@
 package com.openclassrooms.occhatop.controllers;
 
+import com.openclassrooms.occhatop.dao.RegisterRequest;
 import com.openclassrooms.occhatop.models.message.Message;
 import com.openclassrooms.occhatop.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -19,8 +21,9 @@ public class MessageController {
     @Operation(summary = "Post message", description = "Post a new message")
     @SecurityRequirement(name = "Bearer Authentication")
     @PostMapping
-    public void create(@RequestBody Message message) {
+    public ResponseEntity<?> create(@RequestBody Message message) {
         messageService.addNewMessage(message);
+        return ResponseEntity.ok(new RegisterRequest.MessageResponse("the message was successfully published"));
     }
 
 }

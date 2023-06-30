@@ -13,16 +13,3 @@ services:
       - '3306:3306'
     expose:
       - '3306'
-
-  # frontend:
-  #     image: node:14-alpine
-  #     volumes:
-  #       - ./front-end:/app
-  #     working_dir: /app
-  #     ports:
-  #       - 4200:4200
-  #     expose:
-  #       - '4200'
-  #     depends_on:
-  #       - db_prod
-  #     command: npm start
