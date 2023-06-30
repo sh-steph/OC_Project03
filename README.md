@@ -9,7 +9,18 @@ Le front est un projet développé sur Angular 14 et le back sur Springboot 2.7.
 
 ## Par où commencer ?
 
-Pour la partie back du projet, il vous faudra tout d'abord exécuter la commande suivante `docker-compose up` à la racine du projet afin de générer la base de donnée à l'aide de docker, puis importer le dossier **back-end** dans votre IDE dédié (IntelliJ, Eclipse...), `build` et `run` l'application.
+Pour la partie back du projet, il vous faudra tout d'abord exécuter la commande suivante `docker-compose up` à la racine du projet afin de générer la base de donnée à l'aide de docker, puis importer le dossier **back-end** dans votre IDE dédié (IntelliJ, Eclipse...).
+
+Avant de `build` et `run` l'application, veuillez tout d'abord paramétrer les **variables d'environnements** de votre IDE afin que l'application puisse intéragir avec la **base de donnée** dont les variables en question se situent dans le fichier **application.properties** (les valeurs sont paramétrées aux préalables dans le **docker-compose.yml**).
+
+DB_URL=jdbc:mysql://localhost:`port`/`db_name`
+DB_USER=`user`
+DB_PASSWORD=`password`
+
+Exemple sur IntelliJ IDEA: DB_URL=jdbc:mysql://localhost:3306/oc_chatop_db;DB_USER=oc_user;DB_PASSWORD=oc_pwd
+
+<img src='/ressources/images/IntelliJ.png' width='500'/>
+
 
 Pour la partie front du projet, aller dans le dossier **front-end** pour générer le **node_module** en exécutant la commande suivante `npm install`.
 Une fois l'installation complète, executer la commande `npm start` pour exécuter l'application et naviguer sur l'URL fourni (l'URL par défaut `http://localhost:4200/`).
@@ -33,6 +44,69 @@ Ce qui résulte à l'historique suivant à travers les différents commit détai
 
 <details>
   <summary>Structure de l'architecture du projet</summary>
+
+<details>
+  <summary>Arborescence</summary>
+back-end
+├── HELP.md
+├── images
+│   └── rentals
+├── lib
+│   └── webjars-locator-core-0.48.jar
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│   └── main
+│       ├── java
+│       │   └── com
+│       │       └── openclassrooms
+│       │           └── occhatop
+│       │               ├── OcChatopApplication.java
+│       │               ├── configuration
+│       │               │   ├── AuthEntryPointJwt.java
+│       │               │   ├── JwtAuthenticationFilter.java
+│       │               │   ├── SecurityConfig.java
+│       │               │   └── SwaggerConfiguration.java
+│       │               ├── controllers
+│       │               │   ├── AuthenticationController.java
+│       │               │   ├── ImageController.java
+│       │               │   ├── MessageController.java
+│       │               │   ├── RentalController.java
+│       │               │   └── UserController.java
+│       │               ├── dao
+│       │               │   ├── AuthenticationRequest.java
+│       │               │   ├── AuthenticationResponse.java
+│       │               │   └── RegisterRequest.java
+│       │               ├── dto
+│       │               │   ├── RentalDTO.java
+│       │               │   └── UserDTO.java
+│       │               ├── exceptions
+│       │               │   ├── RentalNotFoundException.java
+│       │               │   ├── UserIdNotFoundException.java
+│       │               │   └── UserNotFoundException.java
+│       │               ├── models
+│       │               │   ├── authentication
+│       │               │   │   └── User.java
+│       │               │   ├── message
+│       │               │   │   └── Message.java
+│       │               │   └── rental
+│       │               │       └── Rental.java
+│       │               ├── repositories
+│       │               │   ├── MessageRepository.java
+│       │               │   ├── RentalRepository.java
+│       │               │   └── UserRepository.java
+│       │               └── services
+│       │                   ├── AuthenticationService.java
+│       │                   ├── JwtService.java
+│       │                   ├── MessageService.java
+│       │                   ├── RentalService.java
+│       │                   └── UserService.java
+│       └── resources
+│           ├── application.properties
+│           ├── static
+│           └── templates
+</details>
 
 Vous pourrez constater que l'architecture du projet suit une structure assez commune pour les applications développées sous Spring Boot.
 
@@ -88,6 +162,7 @@ Les mappings API permettent d'exposer les fonctionnalités de l'application aux 
 ## Swagger
 
 Vous avez la possibilitté consulté l'ensemble des API et y expérimenter à travers Swagger via le lien suivant `http://localhost:3000/swagger-ui/index.html` lorsque l'application est exécuté.
+Une grande partie des API nécessitent d'un token (JWT) et il est donc préférable de commencer par l'authentification.
 
 </details>
 <details>
@@ -100,6 +175,7 @@ Vous avez la possibilitté consulté l'ensemble des API et y expérimenter à tr
 | Spring Security |               https://docs.spring.io/spring-security/reference/index.html                |
 | MySql Driver    |                    https://spring.io/guides/gs/accessing-data-mysql/                     |
 | JWT             | https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html |
+| Lombok          |                     https://www.baeldung.com/intro-to-project-lombok                     |
 | Swagger         |                https://www.baeldung.com/spring-rest-openapi-documentation                |
 
 </details>
@@ -121,6 +197,16 @@ Then import the **back-end** folder into your dedicated IDE (IntelliJ, Eclipse..
 For the front-end part of the project, go to the **front-end** folder to generate the **node_module** by executing the following command `npm install`.
 Once the installation is complete, run the command `npm start` to execute the application and navigate to the URL provided (the default URL is `http://localhost:4200/`).
 
+Before `build` and `run` the application, please first set the **environment variables** in your IDE so that the application can interact with the **database** whose variables are located in the **application.properties** file (the values are set beforehand in the **docker-compose.yml**).
+
+DB_URL=jdbc:mysql://localhost:`port`/`db_name`
+DB_USER=`user`
+DB_PASSWORD=`password`
+
+Example on IntelliJ IDEA: DB_URL=jdbc:mysql://localhost:3306/oc_chatop_db;DB_USER=oc_user;DB_PASSWORD=oc_pwd
+
+<img src='/ressources/images/IntelliJ.png' width='500'/>
+
 <details>
   <summary>Development organization</summary>
 
@@ -140,6 +226,69 @@ This results in the following history through the various commits, briefly detai
 
 <details>
   <summary>Project architecture structure</summary>
+
+<details>
+  <summary>Tree</summary>
+back-end
+├── HELP.md
+├── images
+│   └── rentals
+├── lib
+│   └── webjars-locator-core-0.48.jar
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+├── src
+│   └── main
+│       ├── java
+│       │   └── com
+│       │       └── openclassrooms
+│       │           └── occhatop
+│       │               ├── OcChatopApplication.java
+│       │               ├── configuration
+│       │               │   ├── AuthEntryPointJwt.java
+│       │               │   ├── JwtAuthenticationFilter.java
+│       │               │   ├── SecurityConfig.java
+│       │               │   └── SwaggerConfiguration.java
+│       │               ├── controllers
+│       │               │   ├── AuthenticationController.java
+│       │               │   ├── ImageController.java
+│       │               │   ├── MessageController.java
+│       │               │   ├── RentalController.java
+│       │               │   └── UserController.java
+│       │               ├── dao
+│       │               │   ├── AuthenticationRequest.java
+│       │               │   ├── AuthenticationResponse.java
+│       │               │   └── RegisterRequest.java
+│       │               ├── dto
+│       │               │   ├── RentalDTO.java
+│       │               │   └── UserDTO.java
+│       │               ├── exceptions
+│       │               │   ├── RentalNotFoundException.java
+│       │               │   ├── UserIdNotFoundException.java
+│       │               │   └── UserNotFoundException.java
+│       │               ├── models
+│       │               │   ├── authentication
+│       │               │   │   └── User.java
+│       │               │   ├── message
+│       │               │   │   └── Message.java
+│       │               │   └── rental
+│       │               │       └── Rental.java
+│       │               ├── repositories
+│       │               │   ├── MessageRepository.java
+│       │               │   ├── RentalRepository.java
+│       │               │   └── UserRepository.java
+│       │               └── services
+│       │                   ├── AuthenticationService.java
+│       │                   ├── JwtService.java
+│       │                   ├── MessageService.java
+│       │                   ├── RentalService.java
+│       │                   └── UserService.java
+│       └── resources
+│           ├── application.properties
+│           ├── static
+│           └── templates
+</details>
 
 As you can see, the architecture of the project follows a fairly common structure for applications developed with Spring Boot.
 
@@ -196,6 +345,7 @@ API mappings are used to expose the application's functionality to clients, so t
 ## Swagger
 
 You can view and experiment with all the APIs through Swagger through the following link `http://localhost:3000/swagger-ui/index.html` when the application is running.
+Many APIs require a token (JWT), so it's best to start with authentication.
 
 </details>
 
@@ -209,6 +359,7 @@ You can view and experiment with all the APIs through Swagger through the follow
 | Spring Security |               https://docs.spring.io/spring-security/reference/index.html                |
 | MySql Driver    |                    https://spring.io/guides/gs/accessing-data-mysql/                     |
 | JWT             | https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html |
+| Lombok          |                     https://www.baeldung.com/intro-to-project-lombok                     |
 | Swagger         |                https://www.baeldung.com/spring-rest-openapi-documentation                |
 
 </details>
